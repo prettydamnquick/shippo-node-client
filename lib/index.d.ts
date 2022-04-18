@@ -123,6 +123,24 @@ declare namespace Shippo {
     merchant_name: string;
   }
 
+  // https://platform-api-docs.goshippo.com/#operation/idOfPlatformCarrierRegistrationEndpoint
+  interface RegisterMasterCarrierAccountRequestData {
+    carrier: string;
+    parameters: any;
+  }
+
+  interface RegisterMasterCarrierAccountResponseData {
+    account_id: string;
+    active: boolean;
+    carrier: string;
+    is_shippo_account: boolean;
+    metadata: string;
+    object_id: string;
+    object_owner: string;
+    test: boolean;
+    parameters: any;
+  }
+
   interface Shippo {
     shipment: {
       create: (request: CreateShipmentRequest) => Promise<Shipment>;
@@ -132,7 +150,10 @@ declare namespace Shippo {
     };
     merchant: {
       create: (request: CreateMerchantRequest) => Promise<Merchant>;
-      register: (carrier: string, parameters) => Promise<any>;
+      register_master_carrier_account: (
+        merchantId: string,
+        data: RegisterMasterCarrierAccountRequestData,
+      ) => Promise<RegisterMasterCarrierAccountResponseData>;
     };
   }
 }
