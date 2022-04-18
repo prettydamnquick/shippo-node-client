@@ -105,6 +105,42 @@ declare namespace Shippo {
     validate?: boolean | undefined;
   }
 
+  // https://platform-api-docs.goshippo.com/#operation/idOfRegisterMerchantEndpoint
+  interface Merchant {
+    email: string;
+    first_name: string;
+    last_name: string;
+    merchant_name: string;
+    object_created: string; //date-time
+    object_id: string;
+    object_updated: string; //date-time
+  }
+
+  interface CreateMerchantRequest {
+    email: string;
+    first_name: string;
+    last_name: string;
+    merchant_name: string;
+  }
+
+  // https://platform-api-docs.goshippo.com/#operation/idOfPlatformCarrierRegistrationEndpoint
+  interface RegisterMasterCarrierAccountRequestData {
+    carrier: string;
+    parameters: any;
+  }
+
+  interface RegisterMasterCarrierAccountResponseData {
+    account_id: string;
+    active: boolean;
+    carrier: string;
+    is_shippo_account: boolean;
+    metadata: string;
+    object_id: string;
+    object_owner: string;
+    test: boolean;
+    parameters: any;
+  }
+
   interface Shippo {
     shipment: {
       create: (request: CreateShipmentRequest) => Promise<Shipment>;
@@ -112,12 +148,19 @@ declare namespace Shippo {
     address: {
       create: (request: CreateAddressRequest) => Promise<Address>;
     };
+    merchant: {
+      create: (request: CreateMerchantRequest) => Promise<Merchant>;
+      register_master_carrier_account: (
+        merchantId: string,
+        data: RegisterMasterCarrierAccountRequestData,
+      ) => Promise<RegisterMasterCarrierAccountResponseData>;
+    };
   }
 }
 
 interface ShippoStatic {
-  (token: string): Shippo.Shippo;
-  new (token: string): Shippo.Shippo;
+  (token: string, customHost?: string, merchantId?: string): Shippo.Shippo;
+  new (token: string, customHost?: string, merchantId?: string): Shippo.Shippo;
 }
 
 declare const Shippo: ShippoStatic;
