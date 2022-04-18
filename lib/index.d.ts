@@ -132,7 +132,8 @@ declare namespace Shippo {
     };
     merchant: {
       create: (request: CreateMerchantRequest) => Promise<Merchant>;
-    }
+      register: (carrier: string, parameters) => Promise<any>;
+    };
   }
 }
 
