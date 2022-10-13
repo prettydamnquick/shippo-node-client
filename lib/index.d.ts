@@ -162,6 +162,13 @@ declare namespace Shippo {
     test: boolean;
   }
 
+  interface UpdateUserCarrierAccountRequestData {
+    account_id: string;
+    active: boolean;
+    carrier: string;
+    parameters: any;
+  }
+
   interface Shippo {
     shipment: {
       create: (request: CreateShipmentRequest) => Promise<Shipment>;
@@ -178,6 +185,11 @@ declare namespace Shippo {
       connect_user_carrier_account: (
         merchantId: string,
         data: ConnectUserCarrierAccountRequestData,
+      ) => Promise<ConnectUserCarrierAccountResponseData>;
+      update_user_carrier_account: (
+        merchantId: string,
+        carrierAccountId: string,
+        data: UpdateUserCarrierAccountRequestData,
       ) => Promise<ConnectUserCarrierAccountResponseData>;
     };
   }
