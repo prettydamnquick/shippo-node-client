@@ -141,6 +141,34 @@ declare namespace Shippo {
     parameters: any;
   }
 
+  interface ConnectUserCarrierAccountRequestData {
+    account_id: string;
+    active: boolean;
+    carrier: string;
+    metadata: string;
+    parameters: any;
+    test: boolean;
+  }
+
+  interface ConnectUserCarrierAccountResponseData {
+    account_id: string;
+    active: boolean;
+    carrier: string;
+    is_shippo_account: boolean;
+    metadata: string;
+    object_id: string;
+    object_owner: string;
+    parameters: any;
+    test: boolean;
+  }
+
+  interface UpdateUserCarrierAccountRequestData {
+    account_id: string;
+    active: boolean;
+    carrier: string;
+    parameters: any;
+  }
+
   interface Shippo {
     shipment: {
       create: (request: CreateShipmentRequest) => Promise<Shipment>;
@@ -154,6 +182,15 @@ declare namespace Shippo {
         merchantId: string,
         data: RegisterMasterCarrierAccountRequestData,
       ) => Promise<RegisterMasterCarrierAccountResponseData>;
+      connect_user_carrier_account: (
+        merchantId: string,
+        data: ConnectUserCarrierAccountRequestData,
+      ) => Promise<ConnectUserCarrierAccountResponseData>;
+      update_user_carrier_account: (
+        merchantId: string,
+        carrierAccountId: string,
+        data: UpdateUserCarrierAccountRequestData,
+      ) => Promise<ConnectUserCarrierAccountResponseData>;
     };
   }
 }
