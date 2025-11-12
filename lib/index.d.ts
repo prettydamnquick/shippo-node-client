@@ -159,8 +159,8 @@ declare namespace Shippo {
 }
 
 interface ShippoStatic {
-  (token: string, customHost?: string, merchantId?: string, logger?: any): Shippo.Shippo;
-  new (token: string, customHost?: string, merchantId?: string, logger?: any): Shippo.Shippo;
+  (token: string, customHost?: string, merchantId?: string, logger?: any, reqId?: string): Shippo.Shippo;
+  new (token: string, customHost?: string, merchantId?: string, logger?: any, reqId?: string): Shippo.Shippo;
 }
 
 declare const Shippo: ShippoStatic;
